@@ -160,5 +160,6 @@ def main():
     print(f"      Wrote chart data to {CHART_DATA_PATH}", flush=True)
 
 
+
 if __name__ == "__main__":
     main()
