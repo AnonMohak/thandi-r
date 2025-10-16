@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Delivery Time Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+
+    <!-- Chart.js and axios via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="container">
+        <h1>Delivery Time Dashboard</h1>
+        <p>Analytics and prediction for shipping durations</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Analytics Section -->
+      <section class="card fade-in">
+        <h2>Delivery Analytics</h2>
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h3>Average Delivery Days by Market</h3>
+            <canvas id="barChart" height="160"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Average Delivery Days by Department</h3>
+            <canvas id="deptBarChart" height="160"></canvas>
+          </div>
+          <div class="chart-card" style="grid-column: 1 / -1;">
+            <h3>Stock Level vs Delivery Delay</h3>
+            <canvas id="scatterChart" height="180"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prediction Section -->
+      <section class="card fade-in">
+        <h2>Predict Delivery Time</h2>
+        <form id="predictForm" class="form-grid">
+          <div class="form-field">
+            <label for="Market">Market</label>
+            <input type="text" id="Market" name="Market" placeholder="e.g., Europe" required />
+          </div>
+          <div class="form-field">
+            <label for="DepartmentName">Department Name</label>
+            <input type="text" id="DepartmentName" name="Department Name" placeholder="e.g., Sales" required />
+          </div>
+          <div class="form-field">
+            <label for="ShippingMode">Shipping Mode</label>
+            <input type="text" id="ShippingMode" name="Shipping Mode" placeholder="e.g., Standard Class" required />
+          </div>
+
+          <div class="form-field">
+            <label for="DaysScheduled">Days for shipment (scheduled)</label>
+            <input type="number" step="1" id="DaysScheduled" name="Days for shipment (scheduled)" placeholder="e.g., 3" required />
+          </div>
+          <div class="form-field">
+            <label for="LateRisk">Late_delivery_risk</label>
+            <input type="number" step="1" id="LateRisk" name="Late_delivery_risk" placeholder="0 or 1" required />
+          </div>
+          <div class="form-field">
+            <label for="Sales">Sales</label>
+            <input type="number" step="0.01" id="Sales" name="Sales" placeholder="e.g., 150.00" required />
+          </div>
+          <div class="form-field">
+            <label for="Benefit">Benefit per order</label>
+            <input type="number" step="0.01" id="Benefit" name="Benefit per order" placeholder="e.g., 25.50" required />
+          </div>
+          <div class="form-field">
+            <label for="Profit">Order Profit Per Order</label>
+            <input type="number" step="0.01" id="Profit" name="Order Profit Per Order" placeholder="e.g., 12.75" required />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Predict</button>
+          </div>
+        </form>
+
+        <div id="predictionResult" class="result-card hidden">
+          <h3>Predicted Delivery Days</h3>
+          <p id="predictedValue">—</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <small>Built with Flask, scikit-learn, and Chart.js</small>
+      </div>
+    </footer>
+
+    <script src="/static/script.js"></script>
+  </body>
+  </html>
